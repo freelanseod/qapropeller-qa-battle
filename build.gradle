@@ -1,0 +1,50 @@
+group 'com.qa.battle'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+compileTestJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+[compileJava, compileTestJava]*.options.collect { options -> options.encoding = 'UTF-8' }
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    ownerVersion = '1.0.9'
+    assertjVersion = '3.10.0'
+    testngVersion = '6.11'
+    selenideVersion = '5.2.2'
+}
+
+test {
+    systemProperties['file.encoding'] = 'UTF-8'
+    systemProperty "env", System.getProperty("env")
+    systemProperty "branch", System.getProperty("branch", "default")
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+}
+
+dependencies {
+    compile (
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "org.testng:testng:$testngVersion",
+            "com.codeborne:selenide:$selenideVersion"
+    )
+}
