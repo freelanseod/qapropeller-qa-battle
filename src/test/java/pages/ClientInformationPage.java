@@ -2,11 +2,8 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import modals.AdvertisersModal;
-import modals.ClientModal;
-import modals.PublishersModal;
+import modals.ArticlesModal;
 import org.openqa.selenium.By;
-
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byText;
@@ -26,27 +23,26 @@ public class ClientInformationPage {
             articlesHeader = $(".card-header"),
             advertisersButton = userType.get(0),
             publishersButton = userType.get(1),
-            topLevelClientsButton = userType.get(2),
-            firstAdvertiserButton = advertisersButton.$$(".sub-tree-element").get(0),
-            secondAdvertiserButton = advertisersButton.$$(".sub-tree-element").last(),
-            userAvatar = $("#avatar");
+            topLevelClientsButton = userType.last(),
+            userAvatar = $("#avatar"),
+            loader = $("#loader");
 
     public void clickOnAdvertisersButton() {
         advertisersButton.click();
     }
 
-    public PublishersModal clickOnPublishersButton() {
+    public ArticlesModal clickOnPublishersButton() {
         publishersButton.click();
-        return new PublishersModal();
+        return new ArticlesModal();
     }
 
     public void clickOnTopLevelClientsButton() {
         topLevelClientsButton.click();
     }
 
-    public AdvertisersModal clickOnOneOfAdvertisers(int number) {
+    public ArticlesModal clickOnOneOfAdvertisers(int number) {
         advertisersButton.$$(".sub-tree-element").get(number).click();
-        return new AdvertisersModal();
+        return new ArticlesModal();
     }
 
     public void findAdvertiser(String name) {
@@ -61,14 +57,24 @@ public class ClientInformationPage {
         topLevelClientsButton.$(byText(name)).shouldBe(visible);
     }
 
+    public ArticlesModal clickOnClientButton() {
+        clickOnTopLevelClientsButton();
+        return new ArticlesModal();
+    }
+
     public ClientProfilePage clickOnUserAvatar() {
         userAvatar.click();
         return new ClientProfilePage();
     }
 
-    public ClientModal clickOnClientButton() {
-        topLevelClientsButton.click();
-        return new ClientModal();
+    public ArticlesModal clickOnOneOfPublishers(int number) {
+        publishersButton.$$(".sub-tree-element").get(number).click();
+        return new ArticlesModal();
+    }
+
+    public ArticlesModal clickOnOneOfTopClients(int number) {
+        topLevelClientsButton.$$(".sub-tree-element").get(number).click();
+        return new ArticlesModal();
     }
 
 }

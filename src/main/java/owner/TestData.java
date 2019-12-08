@@ -32,7 +32,7 @@ public interface TestData extends Config {
     @Key("user.password.placeholder")
     String getUserPasswordPlaceholder();
 
-    @Key("advertiser.save.header")
+    @Key("article.save.header")
     String getSaveAdvertiserHeader();
 
     @Key("user.profile.header")

@@ -12,6 +12,8 @@
         <classes>
             <class name="ClientTests" />
             <class name="AdvertisersTests" />
+            <class name="PublishersTests" />
+            <class name="TopClientsTests" />
         </classes>
     </test>
 
