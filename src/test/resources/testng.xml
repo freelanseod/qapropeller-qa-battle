@@ -22,5 +22,9 @@
             <class name="UserProfileTests" />
         </classes>
     </test>
+    
+    <listeners>
+        <listener class-name="ui.listeners.PrintNameListener"></listener>
+    </listeners>
 
 </suite>

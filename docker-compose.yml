@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  qabattle:
+    image: qapropeller/qa-battle:latest
+    network_mode: bridge
+    container_name: qabattle
+    ports:
+      - 8080:8080
+
+  selenoid:
+    image: aerokube/selenoid:latest
+    network_mode: bridge
+    container_name: selenoid
+    command: -limit 2 -retry-count 1000
+    ports:
+      - 4444:4444
+    volumes:
+      - ./config:/etc/selenoid:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    links:
+      - qabattle
+
+  selenoid-ui:
+    network_mode: bridge
+    image: aerokube/selenoid-ui:latest
+    container_name: selenoid-ui
+    command: -selenoid-uri 'http://selenoid:4444'
+    ports:
+      - 8081:8080
+    links:
+      - selenoid

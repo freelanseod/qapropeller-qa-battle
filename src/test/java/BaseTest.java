@@ -26,7 +26,7 @@ public class BaseTest {
         String env = System.getProperty("env", "local");
         String serviceUrl = System.getenv("SERVICES_HOST");
 
-        String[] app = {"local-nginx:local-nginx", "partner-mocks:partner-mocks"};
+        String[] app = {"qabattle:qabattle"};
 
         props = new HashMap<>();
         props.put("env", env);
